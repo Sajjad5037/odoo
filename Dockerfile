@@ -5,7 +5,7 @@ ENV HOME /opt/odoo
 WORKDIR /opt/odoo
 
 COPY ./odoo.conf /etc/odoo.conf
-COPY ./requirements.txt /opt/odoo/requirements.txt   # ✅ THIS IS ESSENTIAL
+COPY ./requirements.txt /opt/odoo/requirements.txt   
 COPY ./addons /opt/odoo/addons
 
 RUN pip install -r /opt/odoo/requirements.txt
