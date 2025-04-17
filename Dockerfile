@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 # Switch back to odoo user
 USER odoo
 
-COPY ./odoo.conf /etc/odoo.conf
+COPY ./odoo.conf /etc/odoo/odoo.conf
 COPY ./requirements.txt /opt/odoo/requirements.txt
 COPY ./addons /opt/odoo/addons
 WORKDIR /opt/odoo
