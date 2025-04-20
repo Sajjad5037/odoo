@@ -2,12 +2,13 @@
 FROM odoo:16
 
 # Set environment variables (if needed, adjust for your setup)
-# ENV ODOO_DB_HOST=<your-db-host>
+# ENV ODOO_DB_HOST=postgres.railway.internal
 # ENV ODOO_DB_PORT=5432
-# ENV ODOO_DB_USER=<your-db-user>
-# ENV ODOO_DB_PASSWORD=<your-db-password>
+# ENV ODOO_DB_USER=postgres
+# ENV ODOO_DB_PASSWORD=shuwafF2016
 
 # Pin PostgreSQL to the default version from Debian repositories (avoid PGDG conflicts)
+USER root
 RUN echo "Package: *\nPin: origin deb.debian.org\nPin-Priority: 1001" > /etc/apt/preferences.d/pin-debian
 
 # Install system dependencies and Python libraries needed for Odoo
