@@ -24,3 +24,11 @@ COPY ./requirements.txt /opt/odoo/requirements.txt
 COPY ./addons /opt/odoo/addons
 WORKDIR /opt/odoo
 RUN pip install -r /opt/odoo/requirements.txt
+
+# Back to root to add entrypoint
+USER root
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Entrypoint that will handle user creation and Odoo startup
+ENTRYPOINT ["/entrypoint.sh"]
