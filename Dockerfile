@@ -1,8 +1,16 @@
+# Use the official Odoo 16 image as the base
 FROM odoo:16
 
-# Switch to root to install dependencies
-USER root
+# Set environment variables (if needed, adjust for your setup)
+# ENV ODOO_DB_HOST=<your-db-host>
+# ENV ODOO_DB_PORT=5432
+# ENV ODOO_DB_USER=<your-db-user>
+# ENV ODOO_DB_PASSWORD=<your-db-password>
 
+# Pin PostgreSQL to the default version from Debian repositories (avoid PGDG conflicts)
+RUN echo "Package: *\nPin: origin deb.debian.org\nPin-Priority: 1001" > /etc/apt/preferences.d/pin-debian
+
+# Install system dependencies and Python libraries needed for Odoo
 RUN apt-get update && apt-get install -y \
     build-essential \
     libssl-dev \
@@ -14,21 +22,13 @@ RUN apt-get update && apt-get install -y \
     libsasl2-dev \
     libldap2-dev \
     zlib1g-dev \
- && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Switch back to odoo user
-USER odoo
+# Optionally, copy your Odoo custom addons or configurations here
+# COPY ./your-custom-addons /mnt/extra-addons
 
-COPY ./odoo.conf /etc/odoo/odoo.conf
-COPY ./requirements.txt /opt/odoo/requirements.txt
-COPY ./addons /opt/odoo/addons
-WORKDIR /opt/odoo
-RUN pip install -r /opt/odoo/requirements.txt
+# Expose the Odoo port (default is 8069)
+EXPOSE 8069
 
-# Back to root to add entrypoint
-USER root
-COPY ./entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-# Entrypoint that will handle user creation and Odoo startup
-ENTRYPOINT ["/entrypoint.sh"]
+# Run Odoo
+CMD ["odoo"]
