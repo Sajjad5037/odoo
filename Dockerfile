@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     libpq-dev \
     python3-dev \
-    libjpeg8-dev \
+    libjpeg62-turbo-dev \
     liblcms2-dev \
     libsasl2-dev \
     libldap2-dev \
