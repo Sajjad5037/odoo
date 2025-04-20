@@ -2,10 +2,10 @@
 FROM odoo:16
 
 # Set environment variables (if needed, adjust for your setup)
-# ENV ODOO_DB_HOST=postgres.railway.internal
-# ENV ODOO_DB_PORT=5432
-# ENV ODOO_DB_USER=postgres
-# ENV ODOO_DB_PASSWORD=shuwafF2016
+ENV ODOO_DB_HOST=postgres.railway.internal
+ENV ODOO_DB_PORT=5432
+ENV ODOO_DB_USER=postgres
+ENV ODOO_DB_PASSWORD=shuwafF2016
 
 # Pin PostgreSQL to the default version from Debian repositories (avoid PGDG conflicts)
 USER root
