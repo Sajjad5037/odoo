@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  odoo:
+    image: sajjad5037/custom-odoo:latest
+    container_name: odoo-custom
+    environment:
+      - PGUSER=odoo_user
+      - PGHOST=postgres.railway.internal
+      - PGPORT=5432
+      - PGDATABASE=railway
+      - PGPASSWORD=shuwafF2016
+    ports:
+      - "8069:8069"
+    depends_on:
+      - postgres
+    volumes:
+      - ./odoo.conf:/etc/odoo.conf  # Ensure this path is correct for where your odoo.conf is located
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=odoo_user
+      - POSTGRES_PASSWORD=shuwafF2016
+      - POSTGRES_DB=railway
+    ports:
+      - "5432:5432"
